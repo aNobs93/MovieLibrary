@@ -18,17 +18,10 @@ namespace WebAPISample.Controllers
         {
             var movies = db.Movies.ToList();
             return Ok(movies);
-            //List<Movie> movies = new List<Movie>();
-            //foreach(var movie in db.Movies)
-            //{
-            //    movies.Add(movie);
-            //}
-            //  // Retrieve all movies from db logic
-            //return Ok(movies);
         }
 
         // GET api/values/5
-        //[HttpGet]
+        [HttpGet]
         public IHttpActionResult Get(int id)
         {
             var movie = db.Movies.Find(id);
@@ -37,6 +30,7 @@ namespace WebAPISample.Controllers
         }
 
         // POST api/values
+        [HttpPost]
         public void Post([FromBody]Movie value)
         {
 
@@ -47,23 +41,34 @@ namespace WebAPISample.Controllers
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]Movie value)
+        [HttpPut]
+        public void Put(int id, Movie movie)
         {
             Movie updatedMovie = db.Movies.Where(u => u.MovieId == id).FirstOrDefault();
-            updatedMovie.Title = value.Title;
-            updatedMovie.Genre = value.Genre;
-            updatedMovie.Director = value.Director;
+            updatedMovie.Title = movie.Title;
+            updatedMovie.Genre = movie.Genre;
+            updatedMovie.Director = movie.Director;
             db.SaveChanges();
 
             // Update movie in db logic
         }
 
         // DELETE api/values/5
-        public void Delete(int id)
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
-            Movie movie = db.Movies.Find(id);
-            db.Movies.Remove(movie);
-            db.SaveChanges();
+            try
+            {
+                Movie movie = db.Movies.Find(id);
+                db.Movies.Remove(movie);
+                db.SaveChanges();
+
+            }
+            catch
+            {
+                return BadRequest("No Movie With That Id");
+            }
+            return BadRequest("No Movie With That Id");
 
             // Delete movie from db logic
         }

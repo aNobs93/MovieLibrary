@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "c42c4ab8-b223-4eec-b078-f10e84a90816",
+		"name": "WebApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://localhost:44352/Api/Movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44352/Api/Movie",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44352",
+					"path": [
+						"Api",
+						"Movie"
+					]
+				},
+				"description": "Get Movie Api"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44352/Api/Movie/Post?{}",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"MovieId\": \"6\",\n\t\"Title\": \"Titanic\",\n\t\"Director\": \"James Cameron\",\t\t\n\t\"Genre\": \"Drama\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44352/Api/Movie/Post?{}",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44352",
+					"path": [
+						"Api",
+						"Movie",
+						"Post"
+					],
+					"query": [
+						{
+							"key": "{}",
+							"value": ""
+						}
+					]
+				},
+				"description": "WebApi Post Method\t"
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:44352/api/Movie/9",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"MovieId\": \"9\",\n\t\"Title\": \"The New Titanic\",\n\t\t\"Director\": \"James Cameron\",\t\t\n\t\"Genre\": \"Drama\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:44352/api/Movie/9",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44352",
+					"path": [
+						"api",
+						"Movie",
+						"9"
+					]
+				},
+				"description": "WebApi Put"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

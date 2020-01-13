@@ -16,17 +16,19 @@ namespace WebAPISample.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-            List<Movie> movies = new List<Movie>();
-            foreach(var movie in db.Movies)
-            {
-                movies.Add(movie);
-            }
-              // Retrieve all movies from db logic
+            var movies = db.Movies.ToList();
             return Ok(movies);
+            //List<Movie> movies = new List<Movie>();
+            //foreach(var movie in db.Movies)
+            //{
+            //    movies.Add(movie);
+            //}
+            //  // Retrieve all movies from db logic
+            //return Ok(movies);
         }
 
         // GET api/values/5
-        [HttpGet]
+        //[HttpGet]
         public IHttpActionResult Get(int id)
         {
             var movie = db.Movies.Find(id);

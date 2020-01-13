@@ -16,7 +16,12 @@ namespace WebAPISample.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-            var movies = db.Movies;   // Retrieve all movies from db logic
+            List<Movie> movies = new List<Movie>();
+            foreach(var movie in db.Movies)
+            {
+                movies.Add(movie);
+            }
+              // Retrieve all movies from db logic
             return Ok(movies);
         }
 
@@ -32,18 +37,22 @@ namespace WebAPISample.Controllers
         // POST api/values
         public void Post([FromBody]Movie value)
         {
-            Movie movie = new Movie();
-            movie.Title = value.Title;
-            movie.Genre = value.Title;
-            movie.Director = value.Director;
+
+            db.Movies.Add(value);
             db.SaveChanges();
             
             // Create movie in db logic
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Movie value)
         {
+            Movie updatedMovie = db.Movies.Where(u => u.MovieId == id).FirstOrDefault();
+            updatedMovie.Title = value.Title;
+            updatedMovie.Genre = value.Genre;
+            updatedMovie.Director = value.Director;
+            db.SaveChanges();
+
             // Update movie in db logic
         }
 
@@ -51,6 +60,8 @@ namespace WebAPISample.Controllers
         public void Delete(int id)
         {
             Movie movie = db.Movies.Find(id);
+            db.Movies.Remove(movie);
+            db.SaveChanges();
 
             // Delete movie from db logic
         }

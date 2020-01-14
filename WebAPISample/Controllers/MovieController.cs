@@ -24,9 +24,19 @@ namespace WebAPISample.Controllers
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
-            var movie = db.Movies.Find(id);
-            // Retrieve movie by id from db logic
-            return Ok(movie);
+            try
+            {
+                var movie = db.Movies.Find(id);
+                if(movie != null)
+                {
+                    return Ok(movie);
+                }
+            }
+            catch
+            {
+                return BadRequest("Invalid Id");
+            }
+            return BadRequest("Invalid Id");
         }
 
         // POST api/values
@@ -44,18 +54,29 @@ namespace WebAPISample.Controllers
         [HttpPut]
         public void Put(int id, Movie movie)
         {
-            Movie updatedMovie = db.Movies.Where(u => u.MovieId == id).FirstOrDefault();
-            updatedMovie.Title = movie.Title;
-            updatedMovie.Genre = movie.Genre;
-            updatedMovie.Director = movie.Director;
-            db.SaveChanges();
+            try
+            {
+                Movie updatedMovie = db.Movies.Where(u => u.MovieId == id).FirstOrDefault();
+                if(updatedMovie != null)
+                {
+                    updatedMovie.Title = movie.Title;
+                    updatedMovie.Genre = movie.Genre;
+                    updatedMovie.Director = movie.Director;
+                    db.SaveChanges();
+                }
+
+            }
+            catch
+            {
+                 BadRequest("Invalid Id");
+            }
 
             // Update movie in db logic
         }
 
         // DELETE api/values/5
         [HttpDelete]
-        public IHttpActionResult Delete(int id)
+        public void Delete(int id)
         {
             try
             {
@@ -66,10 +87,8 @@ namespace WebAPISample.Controllers
             }
             catch
             {
-                return BadRequest("No Movie With That Id");
+                 BadRequest("No Movie With That Id");
             }
-            return BadRequest("No Movie With That Id");
-
             // Delete movie from db logic
         }
     }

@@ -226,6 +226,10 @@
     <Compile Include="Migrations\202001131910437_FirstInitalMigration.Designer.cs">
       <DependentUpon>202001131910437_FirstInitalMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001151955236_AddingImageAsProperty.cs" />
+    <Compile Include="Migrations\202001151955236_AddingImageAsProperty.Designer.cs">
+      <DependentUpon>202001151955236_AddingImageAsProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -348,6 +352,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202001131910437_FirstInitalMigration.resx">
       <DependentUpon>202001131910437_FirstInitalMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001151955236_AddingImageAsProperty.resx">
+      <DependentUpon>202001151955236_AddingImageAsProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -52,24 +52,32 @@ namespace WebAPISample.Controllers
 
         // PUT api/values/5
         [HttpPut]
-        public void Put(int id, Movie movie)
+        public IHttpActionResult Put(int id, Movie movie)
         {
             try
             {
                 Movie updatedMovie = db.Movies.Where(u => u.MovieId == id).FirstOrDefault();
-                if(updatedMovie != null)
+                
+                //if(updatedMovie.Title != null && updatedMovie.Genre != null && updatedMovie.Director != null)
+                if(movie.Title != null && movie.Genre != null && movie.Director != null && movie.ImageURL != null)
                 {
                     updatedMovie.Title = movie.Title;
                     updatedMovie.Genre = movie.Genre;
                     updatedMovie.Director = movie.Director;
+                    updatedMovie.ImageURL = movie.ImageURL;
                     db.SaveChanges();
+                    return Ok();
                 }
-
+                if(movie.Title == null && movie.Genre == null && movie.Director == null && movie.ImageURL == null)
+                {
+                    return BadRequest("Invalid Id");
+                }
             }
             catch
             {
-                 BadRequest("Invalid Id");
+                 return BadRequest("Invalid Id");
             }
+            return BadRequest("Invalid Id");
 
             // Update movie in db logic
         }

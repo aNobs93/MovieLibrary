@@ -59,7 +59,11 @@ namespace WebAPISample.Controllers
                 Movie updatedMovie = db.Movies.Where(u => u.MovieId == id).FirstOrDefault();
                 
                 //if(updatedMovie.Title != null && updatedMovie.Genre != null && updatedMovie.Director != null)
-                if(movie.Title != null && movie.Genre != null && movie.Director != null && movie.ImageURL != null)
+                if(movie.Title == null && movie.Genre == null && movie.Director == null && movie.ImageURL == null)
+                {
+                    return BadRequest("Invalid Id");
+                }
+                if (movie != updatedMovie)
                 {
                     updatedMovie.Title = movie.Title;
                     updatedMovie.Genre = movie.Genre;
@@ -67,10 +71,6 @@ namespace WebAPISample.Controllers
                     updatedMovie.ImageURL = movie.ImageURL;
                     db.SaveChanges();
                     return Ok();
-                }
-                if(movie.Title == null && movie.Genre == null && movie.Director == null && movie.ImageURL == null)
-                {
-                    return BadRequest("Invalid Id");
                 }
             }
             catch
